@@ -449,4 +449,4 @@ THREEx.DomEvents.prototype._onTouchEvent	= function(eventName, domEvent)
 	this._onEvent(eventName, mouseX, mouseY, domEvent);	
 }
 
-export default let DomEvents = THREEx.DomEvents;
+export default DomEvents = THREEx.DomEvents;
