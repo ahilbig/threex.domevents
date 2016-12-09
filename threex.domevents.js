@@ -64,6 +64,7 @@
 
 //
 
+import {Raycaster, Vector2} from 'three';
 /** @namespace */
 var THREEx		= THREEx 		|| {};
 
