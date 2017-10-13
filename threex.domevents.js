@@ -440,8 +440,11 @@ THREEx.DomEvents.prototype._onTouchMove	= function(domEvent)
 
 	domEvent.preventDefault();
 
-	var mouseX	= +(touches[ 0 ].pageX / ((element === window) ? window.innerWidth	: element.offsetWidth) * 2 - 1;
-	var mouseY	= -(touches[ 0 ].pageY / ((element === window) ? window.innerHeight	: element.offsetHeight) * 2 + 1;
+	var dimensionX = (element === window) ? window.innerWidth	: element.offsetWidth;
+	var dimensionY = (element === window) ? window.innerHeight	: element.offsetHeight;
+
+	var mouseX	= +(touches[ 0 ].pageX / dimensionX ) * 2 - 1;
+	var mouseY	= -(touches[ 0 ].pageY / dimensionY ) * 2 + 1;
 	this._onMove('mousemove', mouseX, mouseY, domEvent);
 	this._onMove('mouseover', mouseX, mouseY, domEvent);
 	this._onMove('mouseout' , mouseX, mouseY, domEvent);
