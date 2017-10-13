@@ -428,6 +428,7 @@ THREEx.DomEvents.prototype._onTouchEnd	= function(event){ return this._onTouchEv
 
 THREEx.DomEvents.prototype._onTouchMove	= function(domEvent)
 {
+	var element = domEvent.target || domEvent.srcElement;
 	var touches;
 	if( domEvent.touches.length > 0 ) {
 		touches = domEvent.touches;
@@ -439,8 +440,8 @@ THREEx.DomEvents.prototype._onTouchMove	= function(domEvent)
 
 	domEvent.preventDefault();
 
-	var mouseX	= +(touches[ 0 ].pageX / window.innerWidth ) * 2 - 1;
-	var mouseY	= -(touches[ 0 ].pageY / window.innerHeight) * 2 + 1;
+	var mouseX	= +(touches[ 0 ].pageX / ((element === window) ? window.innerWidth	: element.offsetWidth) * 2 - 1;
+	var mouseY	= -(touches[ 0 ].pageY / ((element === window) ? window.innerHeight	: element.offsetHeight) * 2 + 1;
 	this._onMove('mousemove', mouseX, mouseY, domEvent);
 	this._onMove('mouseover', mouseX, mouseY, domEvent);
 	this._onMove('mouseout' , mouseX, mouseY, domEvent);
@@ -448,6 +449,7 @@ THREEx.DomEvents.prototype._onTouchMove	= function(domEvent)
 
 THREEx.DomEvents.prototype._onTouchEvent	= function(eventName, domEvent)
 {
+  var element = domEvent.target || domEvent.srcElement;
 	var touches;
 	if( domEvent.touches.length > 0 ) {
 		touches = domEvent.touches;
@@ -459,8 +461,11 @@ THREEx.DomEvents.prototype._onTouchEvent	= function(eventName, domEvent)
 
 	domEvent.preventDefault();
 
-	var mouseX	= +(touches[ 0 ].pageX / window.innerWidth ) * 2 - 1;
-	var mouseY	= -(touches[ 0 ].pageY / window.innerHeight) * 2 + 1;
+	var dimensionX = (element === window) ? window.innerWidth	: element.offsetWidth;
+	var dimensionY = (element === window) ? window.innerHeight	: element.offsetHeight;
+
+	var mouseX	= +(touches[ 0 ].pageX / dimensionX ) * 2 - 1;
+	var mouseY	= -(touches[ 0 ].pageY / dimensionY ) * 2 + 1;
 	this._onEvent(eventName, mouseX, mouseY, domEvent);
 }
 
